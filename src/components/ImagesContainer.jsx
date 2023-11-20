@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
+import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 const StandardImageList = ({ itemData }) => {
   const breakpoints = {
@@ -38,23 +38,22 @@ const StandardImageList = ({ itemData }) => {
 
 
   return (
-    <ImageList
-      variant="woven"
-      sx={{ width: '90vw', height: '80vh' }}
-      cols={columns}
-      gap={8}
-    >
-      {itemData.map((item) => (
-        <ImageListItem key={item}>
-          <img
-            src={`${item}?w=164&h=164&fit=crop&auto=format`}
-            srcSet={`${item}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-            alt={item}
-            loading="lazy"
-          />
-        </ImageListItem>
-      ))}
-    </ImageList>
+    <Box sx={{ width: "85vw", height: "80vh", overflowY: 'scroll' }}>
+      <ImageList
+        variant="masonry" cols={columns} gap={8}
+      >
+        {itemData.map((item) => (
+            <ImageListItem key={item}>
+              <img
+                src={`${item}?w=164&h=164&fit=crop&auto=format`}
+                srcSet={`${item}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                alt={item}
+                loading="lazy"
+              />
+            </ImageListItem>
+          ))}
+      </ImageList>
+    </Box>
   );
 }
 

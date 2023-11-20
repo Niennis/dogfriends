@@ -2,12 +2,13 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import ClearIcon from '@mui/icons-material/Clear';
 
-const Filters = ({ filter, removeFilter }) => {
+const FilterButton = ({ filter, removeFilter }) => {
   return (
     <Button
       sx={{
         margin: '8px',
         color: '#57817f',
+        maxWidth: "200px",
         borderColor: '#57817f',
         '&:hover': {
           backgroundColor: '#57817f',
@@ -35,4 +36,4 @@ const Filters = ({ filter, removeFilter }) => {
   )
 }
 
-export default Filters;
+export default FilterButton;

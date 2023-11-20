@@ -3,7 +3,7 @@ import MenuItem from '@mui/material/MenuItem';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 
-const Breed = ({ dogs, breed, handleBreed, handleSubBreed }) => {
+const BreedSelect = ({ dogs, breed, handleBreed, handleSubBreed }) => {
   const [hide, setHide] = useState(false)
 
   return (
@@ -32,7 +32,7 @@ const Breed = ({ dogs, breed, handleBreed, handleSubBreed }) => {
               value={sub}
               onClick={() => handleSubBreed(breed, sub)}
             >
-              {sub}
+              - {sub}
             </MenuItem >
           )
         })
@@ -41,4 +41,4 @@ const Breed = ({ dogs, breed, handleBreed, handleSubBreed }) => {
   )
 }
 
-export default Breed;
+export default BreedSelect;

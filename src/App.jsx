@@ -5,16 +5,18 @@ import {
   getImagesBySubBreed
 } from './fetch';
 
-import Breed from './components/breed'
-import StandardImageList from './components/images';
-import Filters from './components/filters';
-import ButtonAppBar from './components/appBar'
+import BreedSelect from './components/BreedSelect'
+import StandardImageList from './components/ImagesContainer';
+import FilterButton from './components/FilterButton';
+import ButtonAppBar from './components/AppBar'
 
 import './App.css'
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 function App() {
   const [dogs, setDogs] = useState([])
@@ -68,7 +70,6 @@ function App() {
 
     setImgs(current => current.filter(
       item => {
-        console.log('item', item, filter);
         return !item.includes(`${filter}/`)
       }
     ))
@@ -78,14 +79,14 @@ function App() {
     <div className="App">
       <ButtonAppBar />
       <main>
-        <section className='aside'>
+        <aside className='aside'>
           <FormControl
             className='selected'
             variant="filled"
             sx={{
               m: 1,
               minWidth: 120,
-              maxWidth: 150,
+              maxWidth: 200,
               color: 'white',
               '&:hover': {
                 backgroundColor: '#EFEEF1',
@@ -105,7 +106,7 @@ function App() {
           >
             <InputLabel
               sx={{
-                color: '#57817f'
+                color: '#57817f',
               }}
               id="demo-simple-select-filled-label"
             >Breed
@@ -116,13 +117,18 @@ function App() {
               value=''
               sx={{
                 padding: 0,
+                maxWidth: '200px',
                 '&:after': {
                   borderBottom: '#97c7c4',
                 }
               }}
             >
-              {Object.keys(dogs).map((dog, i) =>
-                <Breed
+              { dogs.length === 0
+              ? <Box sx={{ display: 'flex' }}>
+                  <CircularProgress />
+                </Box>
+              : Object.keys(dogs).map((dog, i) =>
+                <BreedSelect
                   breed={dog}
                   dogs={dogs}
                   key={dog + i}
@@ -139,7 +145,7 @@ function App() {
           >
             {filters.length !== 0
               && filters.map(filter =>
-                <Filters
+                <FilterButton
                   filter={filter}
                   removeFilter={() => removeFilter(filter)}
                   key={filter}
@@ -147,7 +153,7 @@ function App() {
               )
             }
           </Stack>
-        </section>
+        </aside>
 
         <section className='imgContainer'>
           {imgs.length !== 0
